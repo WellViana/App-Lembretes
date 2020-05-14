@@ -1,51 +1,30 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, Keyboard} from 'react-native';
-import { Cartao } from './Cartao';
-import Medidas from '../Medidas/Medidas';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const ContatoItem = (props) => {
+import cores from '../constantes/Cores'
+import medidas from '../medidas/medidas';
 
-    const confirmaExclusao = () => {
-        Alert.alert(
-            'Deletar contato',
-            'Tem certeza que deseja excluir esse item?', //mensagem
-            //coleção de botões, cada botão é um JSON
-            [
-                {text: 'Deletar', style: 'default', onPress: () => props.onDelete(props.chave)},
-                {text: 'Cancelar', style: 'default', onPress:  Keyboard.dismiss()},
-            ]
-        );
-       
-    }
-
-    return(
-        <TouchableOpacity onPress={() => props.onClick(props.chave)} onLongPress={confirmaExclusao}>
-            <View style={styles.item}>
-                <Cartao estilos={styles.cartao}>
-                    <Text>{props.nome}</Text>
-                    <Text>{props.fone}</Text>
-                </Cartao>
+const ContatoItem = (props) =>{
+    return (
+        <TouchableOpacity onPress={props.onPress.bind(this, props.contato)} onLongPress={props.onDelete.bind(this, props.contato.key)}>
+            <View style={styles.itemNaLista}>
+                <Text>#{props.contato.key}</Text>
+                <Text>Nome: {props.contato.nome}</Text>
+                <Text>Celular: {props.contato.celular}</Text>
             </View>
         </TouchableOpacity>
     );
 }
 
-const styles = StyleSheet.create ({
-    item: {
-        display: 'flex',
-        flexDirection: 'row', 
-        justifyContent: 'space-around',
-        marginBottom: Medidas.margin10
-    },
-    cartao: {
-        //300 pontos de largura
-        width: Medidas.width300,
-        maxWidth: Medidas.width100,
-        display: 'flex',
-        flexDirection: 'row', 
-        justifyContent: 'space-around',
-        
-    },
+const styles = StyleSheet.create({
+    itemNaLista: {
+        padding: medidas.PEQUENO,
+        backgroundColor: cores.CINZA,
+        borderColor: cores.PRETO,
+        borderWidth: medidas.MINIMO,
+        marginBottom: medidas.PEQUENO,
+        borderRadius: medidas.PEQUENO
+    }
 });
 
 export default ContatoItem;

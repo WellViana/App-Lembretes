@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "contatos",
+    "name": "Lista de contatos",
+    "slug": "app-contatos",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
